@@ -1,17 +1,116 @@
-const app = express();
-// set port
-const port = 3000;
-// set view engine
-app.set('view engine', 'pug');
-// set views directory
-app.set('views', './views');
-// set static file directory
-app.use(express.static('public'));
-// set route
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Hey', message: 'Hello there!' });
+// Create web server
+var express = require('express');
+// Create app
+var app = express();
+// Create port
+var port = process.env.PORT || 3000;
+// Create middleware
+app.use(express.static(__dirname + '/public'));
+// Start server
+app.listen(port, function() {
+    console.log('Server started on port ' + port);
+});
+// Create routes
+app.get('/', function(req, res) {
+    res.send('Hello Express');
+});
+app.get('/about', function(req, res) {
+    res.send('About page');
+});
+app.get('/bad', function(req, res) {
+    res.send({
+        errorMessage: 'Unable to handle request'
+    });
+});
+// Create middleware
+app.use(function(req, res, next) {
+    res.render('maintenance.hbs');
+});
+// Create helper
+hbs.registerHelper('getCurrentYear', function() {
+    return new Date().getFullYear();
+});
+// Create helper
+hbs.registerHelper('screamIt', function(text) {
+    return text.toUpperCase();
+});
+// Create route
+app.get('/', function(req, res) {
+    res.render('home.hbs', {
+        pageTitle: 'Home Page', 
+        welcomeMessage: 'Welcome to my website'
+    });
+});
+// Create route
+app.get('/about', function(req, res) {
+    res.render('about.hbs', {
+        pageTitle: 'About Page'
+    });
+});
+// Create route
+app.get('/projects', function(req, res) {
+    res.render('projects.hbs', {
+        pageTitle: 'Projects'
+    });
+});
+// Create route
+app.get('/bad', function(req, res) {
+    res.send({
+        errorMessage: 'Unable to handle request'
+    });
+});
+// Create helper
+hbs.registerHelper('getCurrentYear', function() {
+    return new Date().getFullYear();
+});
+// Create helper
+hbs.registerHelper('screamIt', function(text) {
+    return text.toUpperCase();
+});
+// Create app
+var app = express();
+// Create port
+var port = process.env.PORT || 3000;
+// Create middleware
+app.use(express.static(__dirname + '/public'));
+// Start server
+app.listen(port, function() {
+    console.log('Server started on port ' + port);
+});
+// Create route
+app.get('/', function(req, res) {
+    res.render('home.hbs', {
+        pageTitle: 'Home Page', 
+        welcomeMessage: 'Welcome to my website'
+    });
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+// Create route
+app.get('/about', function(req, res) {
+    res.render('about.hbs', {
+        pageTitle: 'About Page'
+    });
 });
+// Create route
+app.get('/projects', function(req, res) {
+    res.render('projects.hbs', {
+        pageTitle: 'Projects'
+    });
+});
+
+// Create route
+app.get('/bad', function(req, res) {
+    res.send({
+        errorMessage: 'Unable to handle request'
+    });
+});
+// Create helper
+hbs.registerHelper('getCurrentYear', function() {
+    return new Date().getFullYear();
+});
+// Create helper
+hbs.registerHelper('screamIt', function(text) {
+    return text.toUpperCase();
+});
+
+
